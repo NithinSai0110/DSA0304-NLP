@@ -1,15 +1,15 @@
 import re
-sentence = "The quick brown fox jumps over the lazy dog"
-rules = [
-    (r'\b(?:The|the|A|a|An|an)\b', 'DT'),
-    (r'\b(?:quick|brown|lazy)\b', 'JJ'),
-    (r'\b(?:fox|dog)\b', 'NN'),
-    (r'\b(?:jumps)\b', 'VB'),
-    (r'\b(?:over)\b', 'IN'),
+sentence = "The cat is quick. The dog is bright. Islamlare is running quickly."
+patterns = [
+    (r'\b(?:The|the)\b', 'DET'),
+    (r'\b(?:cat|dog)\b', 'NOUN'),
+    (r'\b(?:islamlare)\b', 'VERB'),
+    (r'\b(?:quickly|brightly)\b', 'ADV'),
+    (r'\b(?:[A-Za-z]+)\b', 'NOUN')
 ]
 pos_tags = []
-for word in sentence.split():
-    for pattern, tag in rules:
+for word in re.findall(r'\b\w+\b', sentence):
+    for pattern, tag in patterns:
         if re.fullmatch(pattern, word):
             pos_tags.append((word, tag))
             break
